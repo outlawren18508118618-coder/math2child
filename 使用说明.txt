@@ -1,0 +1,50 @@
+爸爸陪你做暑假作业 — 使用说明
+================================
+
+一、项目简介
+  小学三年级数学练习网站（位置与方向、除法），共 20 道题。
+  技术栈：Python Flask + HTML/CSS/JavaScript
+
+二、目录结构
+  爸爸陪你做暑假作业/
+  ├── app.py              后端与题库
+  ├── requirements.txt    依赖列表
+  ├── 使用说明.txt        本文件
+  ├── templates/
+  │   └── index.html
+  └── static/
+      ├── style.css
+      └── app.js
+
+三、本地运行（Windows）
+  1. 安装 Python 3.10 或以上
+  2. 打开命令行，进入本项目目录
+  3. 安装依赖：
+       pip install -r requirements.txt
+  4. 启动网站：
+       python app.py
+  5. 浏览器打开：http://127.0.0.1:5000
+
+  开发调试（可选，开启热重载）：
+       set FLASK_DEBUG=1
+       python app.py
+
+四、服务器部署（Linux 示例）
+  pip install -r requirements.txt
+  gunicorn -w 2 -b 0.0.0.0:5000 app:app
+
+  自定义端口：
+       export PORT=8080
+       gunicorn -w 2 -b 0.0.0.0:8080 app:app
+
+五、功能说明
+  - 首页选择「位置与方向」或「除法」开始练习
+  - 每题 4 个选项，点击后立即判对错并显示解析
+  - 5 秒后自动下一题，也可点击「下一题」按钮
+  - 全部完成后显示得分
+
+六、API 接口
+  GET  /                         首页
+  GET  /api/categories           分类列表
+  GET  /api/questions/<分类id>   题目（不含答案）
+  POST /api/check                提交判题
